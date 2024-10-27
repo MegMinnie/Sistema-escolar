@@ -1,57 +1,53 @@
 import java.util.ArrayList;
 
 public class Turma {
-  static ArrayList<Professor> funcionarios = new ArrayList<>();
-  static ArrayList<Aluno> estudantes = new ArrayList<>();
-  private String identificacao;
-  private Curso curso;
+    private String identificacao;
+    private ArrayList<Curso> cursos = new ArrayList<>();  
+    private ArrayList<Professor> professores = new ArrayList<>();
+    private ArrayList<Aluno> alunos = new ArrayList<>();
 
-  public Turma(String identificacao, Curso curso) {
-    this.identificacao = identificacao; 
-    this.curso = curso;
-  }
+    public Turma(String identificacao) {
+        this.identificacao = identificacao;
+    }
 
-  public Turma(String identificacao2, String string) {
-    return;
-  }
+    public String getIdentificacao() {
+        return identificacao;
+    }
 
-  public String getIdentificacao(){
-    return identificacao;
-  }
+    public void setIdentificacao(String identificacao) {
+        this.identificacao = identificacao;
+    }
 
-  public void setIdentificacao(String identificacao){
-    this.identificacao = identificacao;
-  }
+    public ArrayList<Curso> getCursos() {
+        return cursos;
+    }
 
+  
+    public void adicionarCurso(Curso curso) {
+        cursos.add(curso);
+    }
 
-  public Curso getCurso(){
-    return curso;
-  }
+    public void adicionarProfessor(Professor professor) {
+        professores.add(professor);
+    }
 
-  public void setCurso(Curso curso){
-    this.curso = curso;
-  }
+    public void adicionarAluno(Aluno aluno) {
+        alunos.add(aluno);
+    }
 
-  public void adicionarProfessor(Professor professor){
-    funcionarios.add(professor);
-  }
-  public void adicionarAluno(Aluno estudante){
-    estudante.add(estudante);
-  }
-
-  public void adicionarCurso(Curso curso){
-    this.curso = curso;
-  }
-
-  public static void setAluno(Aluno aluno) {
-    estudantes.add(aluno);
-  } 
-
-  public static void setProfessor(Professor professor){
-    funcionarios.add(professor);
-  }
-
-  public void exibirDados() {
-    System.out.println("Turma: " + identificacao + " Curso: " + curso.getNomeCurso());
-  }
+    public void exibirDados() {
+        System.out.println("Turma: " + identificacao);
+        System.out.println("Cursos:");
+        for (Curso curso : cursos) {
+            System.out.println("- " + curso.getNomeCurso());
+        }
+        System.out.println("Professores:");
+        for (Professor professor : professores) {
+            professor.exibirDados();
+        }
+        System.out.println("Alunos:");
+        for (Aluno aluno : alunos) {
+            aluno.exibirDados();
+        }
+    }
 }
