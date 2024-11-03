@@ -34,9 +34,18 @@ public class Aluno extends Pessoa {
       return ((Double)this.notas.get(0) + (Double)this.notas.get(1) + (Double)this.notas.get(2)) / 3.0;
    }
 
-   public boolean verificarAprovado() {
-      return this.calcularMedia() >= 7.0;
-   }
+   public boolean verificarSituacao() {
+    if (calcularMedia() >= 7.0) {
+        System.out.println("Aprovado");
+        return true; 
+    } else if (calcularMedia() >= 2.5 && calcularMedia() < 7) {
+        System.out.println("Em recuperação");
+        return false; 
+    } else {
+        System.out.println("Reprovado");
+        return false; 
+    }
+}
 
    public void exibirDados(){
     super.imprimirDados();

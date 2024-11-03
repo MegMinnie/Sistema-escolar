@@ -70,7 +70,6 @@ public void setSemestre( String semestre){
 
   public void exibirDados(){
     System.out.println("Turma: " + identificacao);
-    System.out.println("Cursos:");
     System.out.println("Professores:");
     for (Professor professor : professores){
       professor.exibirDados();
