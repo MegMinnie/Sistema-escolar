@@ -2,53 +2,70 @@ package classes;
 
 import java.util.ArrayList;
 
-public class Aluno extends Pessoa {
-   private String matricula;
-   private ArrayList<Double> notas = new ArrayList();
+public class Aluno extends Pessoa implements Printable {
+  private String matricula;
+  private ArrayList<Double> notas = new ArrayList<>();
+  private Double NotaRecuperacao;
 
-   public Aluno() {
-   }
+  public Aluno() {}
 
-   Aluno(String var1, String var2, String var3, String var4, String var5) {
-      super(var1, var2, var3, var4);
-      this.matricula = var5;
-   }
+  public Aluno(String nome, String cpf, String telefone, String endereco, String matricula, Double notaRecuperacao) {
+    super(nome, cpf, telefone, endereco);
+    this.matricula = matricula;
+    this.NotaRecuperacao = notaRecuperacao;
+  }
 
-   public String getMatricula() {
-      return this.matricula;
-   }
+  public String getMatricula() {
+    return this.matricula;
+  }
 
-   public void setMatricula(String var1) {
-      this.matricula = var1;
-   }
+  public void setMatricula(String matricula) {
+    this.matricula = matricula;
+  }
 
-   public ArrayList<Double> getNotas() {
-      return this.notas;
-   }
+  public ArrayList<Double> getNotas() {
+    return this.notas;
+  }
 
-   public void setNotas(double var1) {
-      this.notas.add(var1);
-   }
+  public void setNotas(double notas) {
+    this.notas.add(notas);
+  }
 
-   public double calcularMedia() {
-      return ((Double)this.notas.get(0) + (Double)this.notas.get(1) + (Double)this.notas.get(2)) / 3.0;
-   }
+  public Double getNotaRecuperacao() {
+    return this.NotaRecuperacao;
+  }
 
-   public boolean verificarSituacao() {
-    if (calcularMedia() >= 7.0) {
-        System.out.println("Aprovado");
-        return true; 
-    } else if (calcularMedia() >= 2.5 && calcularMedia() < 7) {
-        System.out.println("Em recuperação");
-        return false; 
+  public void NotaRecuperacao(Double notaRecuperacao) {
+    this.NotaRecuperacao = notaRecuperacao;
+  }
+
+  public double calcularMedia() {
+    double media = (this.notas.get(0) + this.notas.get(1) + this.notas.get(2)) / 3.0;
+
+    return media;
+  }
+
+  public boolean verificarSituacao() {
+    boolean aprovado = false;
+    double media = this.calcularMedia();
+
+    if (media < 2.5) {
+      System.out.println("Reprovado");
+    } else if (media < 7) {
+      System.out.println("Em recuperação");
     } else {
-        System.out.println("Reprovado");
-        return false; 
+      System.out.println("Aprovado");
+      aprovado = true;
     }
-}
 
-   public void exibirDados(){
-    super.imprimirDados();
-    System.out.println("Matrícula: " + matricula);
+    return aprovado;
+  }
+
+  public void exibirDados() {
+    System.out.println("Nome: " + this.getNome());
+    System.out.println("CPF: " + this.getCpf());
+    System.out.println("Endereço: " + this.getEndereco());
+    System.out.println("Telefone: " + this.getTelefone());
+    System.out.println("Matrícula: " + this.matricula);
   }
 }
