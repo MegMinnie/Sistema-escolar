@@ -1,5 +1,5 @@
-div align="center">
-  <h1>Sistema Escolar</h1>
+<div align="center">
+<h1>Sistema Escolar</h1>
   <ul> 
     <img src="https://img.shields.io/badge/JAVA-23.1-blue" />
     <img src="https://img.shields.io/badge/LICENSE-MIT-yellow" />
