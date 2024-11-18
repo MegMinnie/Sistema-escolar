@@ -53,7 +53,7 @@ public class Main {
       System.out.println("║     3 - Mostrar a estatística      ║");
       System.out.println("║      4 - Lista de recuperação      ║");
       System.out.println("║          5 - Lista geral           ║");
-      System.out.println("║          6 - Lista geral           ║");
+      System.out.println("║           6 - Histórico            ║");
       System.out.println("║             0 - Sair               ║");
       System.out.println("╚════════════════════════════════════╝");
       System.out.print("Opção: ");
