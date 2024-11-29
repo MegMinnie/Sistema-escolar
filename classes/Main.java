@@ -9,7 +9,7 @@ public class Main {
     ArrayList<Professor> professores = new ArrayList<>();
     ArrayList<Curso> cursos = new ArrayList<>();
     ArrayList<Turma> turmas = new ArrayList<>();
-    Coordenador coordenador = new Coordenador();
+    
     
 
     alunos.add(new Aluno("Mirele Oliveira", "111.111.111-11", "(11) 91111-1111", "Rua A, Bairro A", "1111111", 7.0));
@@ -18,7 +18,6 @@ public class Main {
     alunos.add(new Aluno("Michael Jackson", "444.444.444-44", "(44) 94444-4444", "Rua D, Bairro D", "4444444", 7.0));
     alunos.add(new Aluno("Jair Bolsonaro", "555.555.555-55", "(55) 95555-5555", "Rua E, Bairro E", "5555555", 7.0));
     
-
 
     professores.add(new Professor("Luís Araújo", "666.666.666-66", "(66) 96666-6666", "Rua F, Bairro F", "244576"));
     professores.add(new Professor("Beto Carneiro", "777.777.777-77", "(77) 97777-7777", "Rua G, Bairro G", "325078"));
@@ -61,24 +60,17 @@ public class Main {
 
       switch (opcao) {
         case 1:
-          String name;
-
-          entrada.nextLine();
-          System.out.print("Nome do professor que deseja vincular a função de coodernador: ");
-          name = entrada.nextLine();
-
-          for (Professor p : professores) {
-            if (p.getNome().equals(name)) {
-              coordenador.setNome(name);
-              coordenador.setCpf(p.getCpf());
-              coordenador.setEndereco(p.getEndereco());
-              coordenador.setSiape(p.getSiape());
-              coordenador.setTelefone(p.getTelefone());
-              System.out.printf("Agora o professor %s é coordenador\n", p.getNome());
-              break;
-            }
+         
+        System.out.println("Deseja cadastrar coordenador de curso?:");
+          for (Professor professor : professores) {
+            String nome = professor.getNome();
+            System.out.printf("Nome: %s" , nome );
+            System.out.println();
+          
           }
 
+           break;
+          
           case 2:
             System.out.println("Cadastrar notas");
 
@@ -98,33 +90,11 @@ public class Main {
             
             break;
           case 3:
-            System.out.println("Estáticas das notas dos alunos:");
-            int totalAprovados = 0;
-            int totalReprovados = 0;
-            int totalRecuperação = 0;
 
-            for (Aluno aluno : alunos) {
-              String nome = aluno.getNome();
-              double media = aluno.calcularMedia();
-
-              System.out.printf("Nome: %s, Média: %.2f\n", nome, media);
-            }
+          turmas.get(0).setEstatica(); 
+          System.out.println();
+          turmas.get(1).setEstatica(); 
             
-            for (Aluno aluno : alunos) {
-              double media = aluno.calcularMedia();
-
-              if (media < 2.5) {
-                totalReprovados++;
-              } else if (media < 7) {
-                totalRecuperação++;
-              } else {
-                totalAprovados++;
-              }
-            }
-
-            System.out.println("Total de aprovados: " + totalAprovados);
-            System.out.println("Total de reprovados: " + totalReprovados);
-            System.out.println("Total de recuperação: " + totalRecuperação);
             break;
           case 4:
             System.out.println("Lista de recuperação");

@@ -3,6 +3,7 @@ package classes;
 public class Professor extends Pessoa {
 
   private String siape;
+ private boolean coordenador = false;
 
  public Professor(){
  super();
@@ -21,6 +22,15 @@ public class Professor extends Pessoa {
 
   public void setSiape( String siape){
     this.siape = siape;
+  }
+
+
+  public boolean getCoordenador(){
+    return coordenador;
+  }
+
+  public void setCoodernador( boolean coordenador){
+    this.coordenador = coordenador;
   }
 
   public void exibirDados(){

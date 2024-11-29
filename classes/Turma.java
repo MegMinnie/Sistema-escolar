@@ -64,9 +64,45 @@ public void setSemestre( String semestre){
     professores.add(professor);
   }
 
+  public void coordenadorDeCurso(Professor professor) {
+    professor.setCoodernador(false); 
+    professores.add(professor); 
+}
+
+
   public void adicionarAluno( Aluno aluno){
     alunos.add(aluno);
   }
+
+  
+  public void setEstatica(){
+    System.out.println("Estáticas das notas dos alunos:");
+    int totalAprovados = 0;
+    int totalReprovados = 0;
+    int totalRecuperação = 0;
+    for (Aluno aluno : alunos) {
+      String nome = aluno.getNome();
+      double media = aluno.calcularMedia();
+
+      System.out.printf("Nome: %s, Média: %.2f\n", nome, media);
+    }
+    
+    for (Aluno aluno : alunos) {
+      double media = aluno.calcularMedia();
+
+      if (media < 2.5) {
+        totalReprovados++;
+      } else if (media < 7) {
+        totalRecuperação++;
+      } else {
+        totalAprovados++;
+      }
+    }
+    System.out.println("Total de aprovados: " + totalAprovados);
+    System.out.println("Total de reprovados: " + totalReprovados);
+    System.out.println("Total de recuperação: " + totalRecuperação);
+    }
+  
 
   public void exibirDados(){
     System.out.println("Turma: " + identificacao);
