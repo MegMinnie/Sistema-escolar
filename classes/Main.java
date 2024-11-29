@@ -61,15 +61,32 @@ public class Main {
       switch (opcao) {
         case 1:
          
-        System.out.println("Deseja cadastrar coordenador de curso?:");
-          for (Professor professor : professores) {
+        System.out.println("Lista de professores:");
+      for (Professor professor : professores) {
             String nome = professor.getNome();
             System.out.printf("Nome: %s" , nome );
             System.out.println();
-          
+            
           }
 
+          System.out.println("Informe o professor que deseja vincular a função de coodernador:");
+          System.out.println();
+          System.out.println("Digite 1 para o professor: " + professores.get(0).getNome());
+          System.out.println("Digite 2 para o professor: " + professores.get(1).getNome());
+          
+         int escolha = entrada.nextInt();
+          
+          if (escolha == 1) {
+              cursos.get(0).vincularCoordenador(professores.get(0));
+             
+          } else if (escolha == 2) {
+              cursos.get(0).vincularCoordenador(professores.get(1));
+             
+          } else {
+              System.out.println("Escolha inválida.");
+          }
            break;
+           
           
           case 2:
             System.out.println("Cadastrar notas");

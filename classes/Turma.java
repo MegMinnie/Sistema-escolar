@@ -60,15 +60,11 @@ public void setSemestre( String semestre){
     this.alunos = alunos;
   }
 
-  public void adicionarProfessor(Professor professor){
-    professores.add(professor);
-  }
-
-  public void coordenadorDeCurso(Professor professor) {
+  
+  public void adicionarProfessor(Professor professor) {
     professor.setCoodernador(false); 
-    professores.add(professor); 
+    professores.add(professor);
 }
-
 
   public void adicionarAluno( Aluno aluno){
     alunos.add(aluno);
