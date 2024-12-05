@@ -60,33 +60,25 @@ public class Main {
 
       switch (opcao) {
         case 1:
-         
-        System.out.println("Lista de professores:");
-      for (Professor professor : professores) {
-            String nome = professor.getNome();
-            System.out.printf("Nome: %s" , nome );
-            System.out.println();
-            
-          }
+    System.out.println("Lista de professores:");
+    for (int i = 0; i < professores.size(); i++) {
+        System.out.printf("%d - %s\n", i + 1, professores.get(i).getNome());
+    }
 
-          System.out.println("Informe o professor que deseja vincular a função de coodernador:");
-          System.out.println();
-          System.out.println("Digite 1 para o professor: " + professores.get(0).getNome());
-          System.out.println("Digite 2 para o professor: " + professores.get(1).getNome());
-          
-         int escolha = entrada.nextInt();
-          
-          if (escolha == 1) {
-              cursos.get(0).vincularCoordenador(professores.get(0));
-             
-          } else if (escolha == 2) {
-              cursos.get(0).vincularCoordenador(professores.get(1));
-             
-          } else {
-              System.out.println("Escolha inválida.");
-          }
-           break;
-           
+    System.out.print("Escolha o professor para vincular como coordenador: ");
+    int escolha = entrada.nextInt();
+
+    if (escolha < 1 || escolha > professores.size()) {
+        System.out.println("Escolha inválida.");
+        break;
+    }
+
+    Professor professorEscolhido = professores.get(escolha - 1);
+
+   
+    professorEscolhido.setCoodernador(true);
+    System.out.println(professorEscolhido.getNome() + " agora é o coordenador.");
+    break;
           
           case 2:
             System.out.println("Cadastrar notas");
@@ -114,30 +106,49 @@ public class Main {
             
             break;
           case 4:
-            System.out.println("Lista de recuperação");
-            
-            for (Aluno aluno : alunos) {
-              if (aluno.calcularMedia() >= 2.5 && aluno.calcularMedia() < 7) {
-                System.out.print("Insira uma nota de recuperação para " + aluno.getNome() + ": ");
-                Double notaRecuperacao = entrada.nextDouble();
-                aluno.NotaRecuperacao(notaRecuperacao);  
-                System.out.println("Nota de recuperação registrada: " + notaRecuperacao);
+          System.out.println("Lista de recuperação");
+          System.out.println("Escolha a turma para listar alunos em recuperação:");
+          for (int i = 0; i < turmas.size(); i++) {
+              System.out.println((i + 1) + " - Turma: " + turmas.get(i).getIdentificacao());
+          }
+          int turmaEscolhida = entrada.nextInt();
+          if (turmaEscolhida < 1 || turmaEscolhida > turmas.size()) {
+              System.out.println("Turma inválida!");
+              break;
+          }
+      
+          Turma turma = turmas.get(turmaEscolhida - 1);
+      
+          System.out.println("Escolha o coordenador para alterar as notas:");
+          for (Professor professor : professores) {
+              if (professor.getCoordenador()) {
+                  System.out.println("Coordenador disponível: " + professor.getNome());
               }
-            }
-    
-            System.out.println("\nResultado da situação dos alunos após recuperação:");
-        
-            for (Aluno aluno : alunos) {
-              Double notaRecuperacao = aluno.getNotaRecuperacao();
-
-              if (notaRecuperacao == null) {
-                System.out.println(aluno.getNome() + ": Sem nota de recuperação");
-            } else if (notaRecuperacao <= 5) {
-                System.out.println(aluno.getNome() + ": Reprovado");
-            } else {
-                System.out.println(aluno.getNome() + ": Aprovado");
-            }}
-            break;
+          }
+      
+          Professor coordenador = null;
+          for (Professor professor : professores) {
+              if (professor.getCoordenador()) {
+                  coordenador = professor;
+                  break;
+              }
+          }
+      
+          if (coordenador == null) {
+              System.out.println("Nenhum coordenador está disponível.");
+              break;
+          }
+      
+          for (Aluno aluno : turma.getAlunos()) {
+              if (aluno.calcularMedia() >= 2.5 && aluno.calcularMedia() < 7) {
+                  System.out.print("Insira uma nota de recuperação para " + aluno.getNome() + ": ");
+                  double novaNota = entrada.nextDouble();
+                  turma.alterarNotaEstudante(coordenador, aluno, novaNota);
+                  System.out.println("Nota de recuperação registrada.");
+              }
+          }
+          break;
+      
           case 5:
             turmas.get(0).exibirDados();
             System.out.println();
@@ -154,13 +165,12 @@ public class Main {
             }
             break;
             case 6:
-           System.out.println("Histórico de alterações dos alunos:");
-           for (Aluno aluno : alunos) {
-           aluno.exibirHistorico();
-           System.out.println();
-           }
-           break;
-
+            System.out.println("Histórico de alterações dos alunos:");
+            for (Aluno aluno : alunos) {
+                aluno.exibirHistorico();
+                System.out.println();
+            }
+            break;
           case 0:
             System.out.println("Saindo...");
             break;

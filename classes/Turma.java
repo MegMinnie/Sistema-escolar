@@ -1,6 +1,7 @@
 package classes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Turma {
 
@@ -9,6 +10,7 @@ public class Turma {
   private String semestre;
   private ArrayList<Professor> professores = new ArrayList<>();
   private ArrayList<Aluno> alunos = new ArrayList<>();
+  private List<Log> logs = new ArrayList<>();
 
   public Turma(){
 
@@ -18,6 +20,7 @@ public class Turma {
     this.identificacao = indentificacao;
     this.curso = curso;
     this.semestre = semestre;
+    this.logs = new ArrayList<>();
   }
 
   public String getIdentificacao(){
@@ -98,8 +101,20 @@ public void setSemestre( String semestre){
     System.out.println("Total de reprovados: " + totalReprovados);
     System.out.println("Total de recuperação: " + totalRecuperação);
     }
-  
 
+
+   
+    public void alterarNotaEstudante(Professor coordenador, Aluno aluno, double novaNota) {
+      if (coordenador.getCoordenador()) {
+        ArrayList<Double>  notaAnterior = aluno.getNotas();
+          aluno.setNotas(novaNota);
+          Log log = new Log(coordenador.getNome(), notaAnterior, novaNota);
+          logs.add(log);
+      } else {
+          System.out.println("Somente coordenadores podem alterar notas.");
+      }
+  }
+  
   public void exibirDados(){
     System.out.println("Turma: " + identificacao);
     System.out.println("Professores:");
