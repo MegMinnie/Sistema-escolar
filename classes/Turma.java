@@ -11,6 +11,7 @@ public class Turma {
   private ArrayList<Professor> professores = new ArrayList<>();
   private ArrayList<Aluno> alunos = new ArrayList<>();
   private List<Log> logs = new ArrayList<>();
+  Nota nota = new Nota();
 
   public Turma(){
 
@@ -81,13 +82,12 @@ public void setSemestre( String semestre){
     int totalRecuperação = 0;
     for (Aluno aluno : alunos) {
       String nome = aluno.getNome();
-      double media = aluno.calcularMedia();
+      double media = nota.calcularMedia();
 
       System.out.printf("Nome: %s, Média: %.2f\n", nome, media);
     }
     
-    for (Aluno aluno : alunos) {
-      double media = aluno.calcularMedia();
+      double media = nota.calcularMedia();
 
       if (media < 2.5) {
         totalReprovados++;
@@ -96,24 +96,36 @@ public void setSemestre( String semestre){
       } else {
         totalAprovados++;
       }
-    }
+    
     System.out.println("Total de aprovados: " + totalAprovados);
     System.out.println("Total de reprovados: " + totalReprovados);
     System.out.println("Total de recuperação: " + totalRecuperação);
     }
 
 
-   
-    public void alterarNotaEstudante(Professor coordenador, Aluno aluno, double novaNota) {
-      if (coordenador.getCoordenador()) {
-        ArrayList<Double>  notaAnterior = aluno.getNotas();
-          aluno.setNotas(novaNota);
-          Log log = new Log(coordenador.getNome(), notaAnterior, novaNota);
-          logs.add(log);
-      } else {
-          System.out.println("Somente coordenadores podem alterar notas.");
-      }
+  
+
+ 
+
+
+  public void alterarNotaEstudante(Professor coordenador, Aluno aluno, double novaNota) {
+    if (coordenador.getCoordenador()){
+      double[] notasAnteriores = {
+       nota.getNota1(),
+       nota.getNota2(),
+       nota.getNota3()
+      };
+ 
+     nota.setNota1(novaNota);
+     nota.setNota2(novaNota);
+     nota.setNota3(novaNota);
+     
+     
+     } else{
+       System.out.println("Somente coordenadores podem alterar notas");
+     }
   }
+
   
   public void exibirDados(){
     System.out.println("Turma: " + identificacao);
@@ -126,4 +138,6 @@ public void setSemestre( String semestre){
       aluno.exibirDados();
     }
   }
+
+  
 }

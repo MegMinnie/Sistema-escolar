@@ -1,33 +1,29 @@
 package classes;
 
-import java.util.ArrayList;
-
 public class Log {
-    private Double notaAtual;
-    private ArrayList<Double> notaAnterior;
-    private String nomeCoordenador;
+  private double[] notaAnterior;
+  private double[] notaAtual;
+  private String nomeCoordenador;
 
-    public Log(String string, Double notaAnterior, double novaNota) {}
+  public Log(String nomeCoordenador, double[] notaAnterior, double[] notaAtual) {
+      this.nomeCoordenador = nomeCoordenador;
+      this.notaAnterior = notaAnterior;
+      this.notaAtual = notaAtual;
+  }
 
-    public Log(String nomeCoordenador, ArrayList<Double> notaAnterior, Double notaAtual) {
-        this.nomeCoordenador = nomeCoordenador;
-        this.notaAnterior = notaAnterior;
-        this.notaAtual = notaAtual;
-    }
-
-    public Double getNotaAtual() {
+    public double[] getNotaAtual() {
         return notaAtual;
     }
 
-    public void setNotaAtual(Double notaAtual) {
+    public void setNotaAtual(double[] notaAtual) {
         this.notaAtual = notaAtual;
     }
 
-    public ArrayList<Double> getNotaAnterior() {
+    public double[] getNotaAnterior() {
         return notaAnterior;
     }
 
-    public void setNotaAnterior(ArrayList<Double> notaAnterior) {
+    public void setNotaAnterior(double[] notaAnterior) {
         this.notaAnterior = notaAnterior;
     }
 
@@ -37,5 +33,18 @@ public class Log {
 
     public void setNomeCoordenador(String nomeCoordenador) {
         this.nomeCoordenador = nomeCoordenador;
+    }
+
+    public  void printLog(){
+      System.out.println("Coordenador: " + nomeCoordenador);
+      System.out.println("Nota anteriores: ");
+      for(double nota : notaAnterior){
+        System.out.printf("%.2f " , nota);
+      }
+      System.out.println("\nNotas atuais: ");
+      for (double nota : notaAtual){
+        System.out.printf("%.2f" , nota);
+      }
+      System.out.println();
     }
 }

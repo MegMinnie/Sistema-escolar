@@ -9,6 +9,7 @@ public class Main {
     ArrayList<Professor> professores = new ArrayList<>();
     ArrayList<Curso> cursos = new ArrayList<>();
     ArrayList<Turma> turmas = new ArrayList<>();
+    Nota nota = new Nota();
     
     
 
@@ -80,25 +81,29 @@ public class Main {
     System.out.println(professorEscolhido.getNome() + " agora é o coordenador.");
     break;
           
-          case 2:
-            System.out.println("Cadastrar notas");
+  case 2:
+  System.out.println("Cadastrar notas");
 
-            for (int i = 0, totalAlunos = alunos.size(); i < totalAlunos; i++) {
-              Aluno aluno = alunos.get(i);
-              System.out.printf("Aluno(a): %s\n", aluno.getNome());
+   for (int i = 0, totalAlunos = alunos.size(); i < totalAlunos; i++) {
+    Aluno aluno = alunos.get(i);
+    System.out.printf("Aluno(a): %s\n", aluno.getNome());
 
-              for (int j = 0; j < 3; j++ ) {
-                System.out.printf("Informe a nota %d: ", j + 1);
-                aluno.setNotas(entrada.nextDouble());
-              }
+    System.out.print("Informe a nota 1: ");
+        nota.setNota1(entrada.nextDouble());
 
-              System.out.printf("Média do(a) %s: %.2f\n", aluno.getNome(), aluno.calcularMedia());
-              System.out.printf("Situação do aluno:" , aluno.getNome(), aluno.verificarSituacao());
-              System.out.println();
-            }
-            
-            break;
-          case 3:
+        System.out.print("Informe a nota 2: ");
+        nota.setNota2(entrada.nextDouble());
+
+        System.out.print("Informe a nota 3: ");
+        nota.setNota3(entrada.nextDouble());
+
+        System.out.printf("Média: %.2f\n", nota.calcularMedia());
+        System.out.print("Situação: ");
+        nota.verificarSituacao();
+    }
+ break;
+         
+    case 3:
 
           turmas.get(0).setEstatica(); 
           System.out.println();
@@ -140,7 +145,7 @@ public class Main {
           }
       
           for (Aluno aluno : turma.getAlunos()) {
-              if (aluno.calcularMedia() >= 2.5 && aluno.calcularMedia() < 7) {
+              if (nota.calcularMedia() >= 2.5 && nota.calcularMedia() < 7) {
                   System.out.print("Insira uma nota de recuperação para " + aluno.getNome() + ": ");
                   double novaNota = entrada.nextDouble();
                   turma.alterarNotaEstudante(coordenador, aluno, novaNota);
